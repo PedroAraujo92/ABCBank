@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Contracts;
 
-internal interface IEntity<TId> : IEntity
+public interface IEntity<TId> : IEntity
     where TId : notnull
 {
     TId Id { get; set; }
 }
 
-internal interface IEntity
+public interface IEntity
 {
 }
