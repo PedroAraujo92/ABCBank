@@ -2,7 +2,7 @@
 
 public enum AccountType : byte
 {
-    Checque,
+    Cheque,
     Current,
     Savings
 }
