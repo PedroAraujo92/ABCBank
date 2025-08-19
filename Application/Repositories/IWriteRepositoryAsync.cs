@@ -2,9 +2,8 @@
 
 namespace Application.Repositories;
 
-public interface IWriteRepositoryAsync<T, in TId> : IReadRepositoryAsync<T, TId>
+public interface IWriteRepositoryAsync<T, in TId>
     where T : class, IEntity<TId>
-    where TId : notnull
 {
     Task<T> AddAsync(T entity);
     Task<T> UpdateAsync(T entity);
