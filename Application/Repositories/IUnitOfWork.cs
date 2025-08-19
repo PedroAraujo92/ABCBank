@@ -2,10 +2,8 @@
 
 namespace Application.Repositories;
 
-internal interface IUnitOfWork<TId> : IDisposable
-    where TId : notnull
+public interface IUnitOfWork<TId> : IDisposable
 {
-    Task<int> CommitAsync();
     Task<int> CommitAsync(CancellationToken cancellationToken);
     IWriteRepositoryAsync<T, TId> GetWriteRepositoryFor<T>()
         where T : BaseEntity<TId>;
