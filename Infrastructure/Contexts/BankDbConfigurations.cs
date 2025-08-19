@@ -7,32 +7,38 @@ using System.ComponentModel;
 
 namespace Infrastructure.Contexts;
 
-public class AccountConfig : IEntityTypeConfiguration<Account>
+internal class AccountConfig : IEntityTypeConfiguration<Account>
 {
     public void Configure(EntityTypeBuilder<Account> builder)
     {
         builder
             .ToTable("Accounts", "Banking")
-            .HasIndex(a=> a.AccountNumber)
+            .HasIndex(a => a.AccountNumber)
             .IsUnique()
             .HasDatabaseName("IX_Accounts_AccountNumber");
 
         builder
             .Property(a => a.Type)
             .HasConversion(new EnumToStringConverter<AccountType>());
+    }
+}
 
-        builder.HasKey(a => a.Id);
-        builder.Property(a => a.Id)
-            .ValueGeneratedOnAdd();
-        builder.Property(a => a.AccountNumber)
-            .IsRequired()
-            .HasMaxLength(20);
-        builder.Property(a => a.Balance)
-            .HasColumnType("decimal(18,2)")
-            .IsRequired();
-        builder.HasOne(a => a.AccountHolder)
-            .WithMany(ah => ah.Accounts)
-            .HasForeignKey(a => a.AccountHolderId)
-            .OnDelete(DeleteBehavior.Cascade);
+internal class AccountHolderConfig : IEntityTypeConfiguration<AccountHolder>
+{
+    public void Configure(EntityTypeBuilder<AccountHolder> builder)
+    {
+        builder
+            .ToTable("AccountHolders", "Banking");
+    }
+}
+
+internal class TransactionConfig : IEntityTypeConfiguration<Transaction>
+{
+    public void Configure(EntityTypeBuilder<Transaction> builder)
+    {
+        builder
+            .ToTable("Transactions", "Banking")
+            .Property(t => t.Type)
+            .HasConversion(new EnumToStringConverter<TransactionType>());
     }
 }
