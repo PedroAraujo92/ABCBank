@@ -39,7 +39,7 @@ public class UnitOfWork<TId> : IUnitOfWork<TId>
         _disposed = true;
     }
 
-    public IReadRepositoryAsync<T, TId> GetReadRepository<T>() where T : BaseEntity<TId>
+    public IReadRepositoryAsync<T, TId> ReadRepositoryFor<T>() where T : BaseEntity<TId>
     {
         if (_repositories == null)
         {
@@ -60,7 +60,7 @@ public class UnitOfWork<TId> : IUnitOfWork<TId>
         return (IReadRepositoryAsync<T, TId>)_repositories[type];
     }
 
-    public IWriteRepositoryAsync<T, TId> GetWriteRepositoryFor<T>() where T : BaseEntity<TId>
+    public IWriteRepositoryAsync<T, TId> WriteRepositoryFor<T>() where T : BaseEntity<TId>
     {
         if (_repositories == null)
         {

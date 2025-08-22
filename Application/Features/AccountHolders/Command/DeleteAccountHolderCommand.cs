@@ -16,7 +16,7 @@ public class DeleteAccountHolderCommandHandler(IUnitOfWork<int> unitOfWork)
     private readonly IUnitOfWork<int> _unitOfWork = unitOfWork;
     public async Task<ResponseWrapper<int>> Handle(DeleteAccountHolderCommand request, CancellationToken cancellationToken)
     {
-        var accountHolderInDb = await _unitOfWork.ReadRepository<AccountHolder>().GetByIdAsync(request.Id);
+        var accountHolderInDb = await _unitOfWork.ReadRepositoryFor<AccountHolder>().GetByIdAsync(request.Id);
         if (accountHolderInDb == null)
         {
             return new ResponseWrapper<int>().Failed("Account holder not found.");

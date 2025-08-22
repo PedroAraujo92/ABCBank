@@ -17,7 +17,7 @@ public class UpdateAccountHolderCommandHandler(IUnitOfWork<int> unitOfWork)
     private readonly IUnitOfWork<int> _unitOfWork = unitOfWork;
     public async Task<ResponseWrapper<int>> Handle(UpdateAccountHolderCommand request, CancellationToken cancellationToken)
     {
-        var accountHolderInDb = await _unitOfWork.ReadRepository<AccountHolder>().GetByIdAsync(request.UpdateAccountHolder.Id);
+        var accountHolderInDb = await _unitOfWork.ReadRepositoryFor<AccountHolder>().GetByIdAsync(request.UpdateAccountHolder.Id);
         if (accountHolderInDb == null)
         {
             return new ResponseWrapper<int>().Failed("Account holder not found.");
