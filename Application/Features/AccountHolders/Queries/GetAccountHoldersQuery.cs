@@ -19,6 +19,12 @@ public class GetAccountHoldersQueryHandler(IUnitOfWork<int> unitOfWork)
     public async Task<ResponseWrapper<List<AccountHolderResponse>>> Handle(GetAccountHoldersQuery request, CancellationToken cancellationToken)
     {
         var accountHoldersInDb = await _unitOfWork.ReadRepositoryFor<AccountHolder>().GetAllAsync();
+
+        if (accountHoldersInDb.Count == 0)
+        {
+            return new ResponseWrapper<List<AccountHolderResponse>>().Failed("No account holders found.");
+        }
+
         var response = accountHoldersInDb.Adapt<List<AccountHolderResponse>>();
         return new ResponseWrapper<List<AccountHolderResponse>>().Success(response, "Account holders retrieved successfully.");
     }
