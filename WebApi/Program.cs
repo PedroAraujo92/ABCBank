@@ -1,5 +1,6 @@
 
 using Infrastructure;
+using Application;
 
 namespace WebApi
 {
@@ -18,6 +19,7 @@ namespace WebApi
 
             builder.Services.AddDatabase(builder.Configuration);
             builder.Services.AddRepositories();
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 
