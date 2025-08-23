@@ -46,7 +46,7 @@ public class UnitOfWork<TId> : IUnitOfWork<TId>
             _repositories = new Hashtable();
         }
 
-        var type = typeof(T).Name;
+        var type = $"{typeof(T).Name}_Read";
         if(!_repositories.ContainsKey(type))
         {
             var repositoryType = 
@@ -67,7 +67,7 @@ public class UnitOfWork<TId> : IUnitOfWork<TId>
             _repositories = new Hashtable();
         }
 
-        var type = typeof(T).Name;
+        var type = $"{typeof(T).Name}_Write";
         if (!_repositories.ContainsKey(type))
         {
             var repositoryType =
