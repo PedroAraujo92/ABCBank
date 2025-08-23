@@ -3,7 +3,7 @@ using Domain.Contracts;
 
 namespace Domain;
 
-public class Account:BaseEntity<int>
+public class Account : BaseEntity<int>
 {
     public string AccountNumber { get; set; }
     public int AccountHolderId { get; set; }
