@@ -70,4 +70,16 @@ public class AccountsController : BaseApiController
         }
         return BadRequest(response);
     }
+
+    [HttpGet("transactions/{accountId}")]
+    public async Task<IActionResult> GetAccountTransactionsAsync(int accountId)
+    {
+        var query = new GetAccountTransactionsQuery { AccountId = accountId };
+        var response = await Sender.Send(query);
+        if (response.IsSuccessful)
+        {
+            return Ok(response);
+        }
+        return NotFound(response);
+    }
 }
