@@ -1,0 +1,31 @@
+﻿using Application.Repositories;
+using Domain.Contracts;
+using Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
+
+namespace Infrastructure.Repositories;
+
+public class ReadRepositoryAsync<T, Tid> : IReadRepositoryAsync<T, Tid>
+    where T : BaseEntity<Tid>
+{
+    private readonly ApplicationDbContext _context;
+
+    public ReadRepositoryAsync(ApplicationDbContext context)
+    {
+        _context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+
+    public async Task<List<T>> GetAllAsync()
+    {
+        return await _context.Set<T>().ToListAsync();
+    }
+
+    public async Task<T> GetByIdAsync(Tid id)
+    {
+        return await _context.Set<T>()
+            .FindAsync(id) 
+            ?? throw new KeyNotFoundException($"Entity of type {typeof(T).Name} with ID {id} not found.");
+    }
+
+    public IQueryable<T> Entities => _context.Set<T>();
+}
