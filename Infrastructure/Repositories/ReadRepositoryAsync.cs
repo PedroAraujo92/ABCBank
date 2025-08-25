@@ -26,4 +26,6 @@ public class ReadRepositoryAsync<T, Tid> : IReadRepositoryAsync<T, Tid>
             .FindAsync(id) 
             ?? throw new KeyNotFoundException($"Entity of type {typeof(T).Name} with ID {id} not found.");
     }
+
+    public IQueryable<T> Entities => _context.Set<T>();
 }
