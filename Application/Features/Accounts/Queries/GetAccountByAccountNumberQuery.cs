@@ -29,8 +29,8 @@ public class GetAccountByAccountNumberQueryHandler : IRequestHandler<GetAccountB
 
         if (accountInDb == null)
         {
-            return new ResponseWrapper<AccountResponse>().Failed("Account not found");
+            return await Task.FromResult(new ResponseWrapper<AccountResponse>().Failed("Account not found"));
         }
-        return new ResponseWrapper<AccountResponse>().Success(accountInDb.Adapt<AccountResponse>(), "Account retrieved successfully");
+        return await Task.FromResult(new ResponseWrapper<AccountResponse>().Success(accountInDb.Adapt<AccountResponse>(), "Account retrieved successfully"));
     }
 }
