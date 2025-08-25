@@ -58,4 +58,16 @@ public class AccountsController : BaseApiController
         }
         return NotFound(response);
     }
+
+    [HttpPost("transaction")]
+    public async Task<IActionResult> CreateTransactionAsync([FromBody] TransactionRequest transaction)
+    {
+        var command = new CreateTransactionCommand { Transaction = transaction };
+        var response = await Sender.Send(command);
+        if (response.IsSuccessful)
+        {
+            return Ok(response);
+        }
+        return BadRequest(response);
+    }
 }
