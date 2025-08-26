@@ -35,7 +35,7 @@ public class AccountsController : BaseApiController
         return NotFound(response);
     }
 
-    [HttpGet("accountNumber/{accountNumber}")]
+    [HttpGet("account-number/{accountNumber}")]
     public async Task<IActionResult> GetAccountByAccountNumberAsync(string accountNumber)
     {
         var query = new GetAccountByAccountNumberQuery { AccountNumber = accountNumber };
