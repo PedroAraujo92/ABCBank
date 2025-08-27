@@ -1,0 +1,25 @@
+﻿@page "/banking/account-holder-list"
+
+<MudTable Items="@AccountHolders" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <ToolBarContent>
+        <MudFab 
+            Color="Color.Primary" 
+            StartIcon="@Icons.Material.Filled.Add" 
+            Size="Size.Small" 
+            OnClick="(() => AddAccountHolderAsync())"/>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>First Name</MudTh>
+        <MudTh>Last Name</MudTh>
+        <MudTh>Date of Birth</MudTh>
+        <MudTh>Contact Number</MudTh>
+        <MudTh>Email</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="First Name">@context.FirstName</MudTd>
+        <MudTd DataLabel="Last Name">@context.LastName</MudTd>
+        <MudTd DataLabel="DOB">@context.DateOfBirth.ToString("dd/MM/yyyy")</MudTd>
+        <MudTd DataLabel="Contact No">@context.ContactNumber</MudTd>
+        <MudTd DataLabel="Email">@context.EmailAddress</MudTd>
+    </RowTemplate>
+</MudTable>

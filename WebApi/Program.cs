@@ -13,6 +13,16 @@ namespace WebApi
 
             // Add services to the container.
 
+            builder.Services.AddCors(policy =>
+            {
+                policy.AddPolicy("BankUI", options =>
+                {
+                    options.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -29,6 +39,7 @@ namespace WebApi
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            app.UseCors("BankUI");
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

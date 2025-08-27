@@ -42,7 +42,7 @@ public class AccountHoldersController : BaseApiController
         return BadRequest(result);
     }
 
-    [HttpGet("get/{id}")]
+    [HttpGet("id/{id}")]
     public async Task<IActionResult> GetAccountHolderAsync(int id)
     {
         var result = await Sender.Send(new GetAccountHolderByIdQuery { Id = id });
