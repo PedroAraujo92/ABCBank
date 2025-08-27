@@ -4,11 +4,11 @@ using Common.Wrapper;
 
 namespace BankUI.Services;
 
-public interface IAccountHolderServices
+public interface IAccountHolderService
 {
     Task<ResponseWrapper<int>> AddAccountHolderAsync(CreateAccountHolder createAccountHolder);
     Task<ResponseWrapper<int>> UpdateAccountHolderAsync(UpdateAccountHolder updateAccountHolder);
     Task<ResponseWrapper<int>> DeleteAccountHolderAsync(int id);
     Task<ResponseWrapper<AccountHolderResponse>> GetAccountHolderByIdAsync(int id);
-    Task<ResponseWrapper<List<AccountHolderResponse>>> GetAccountHoldersByIdAsync();
+    Task<ResponseWrapper<List<AccountHolderResponse>>> GetAccountHoldersAsync();
 }

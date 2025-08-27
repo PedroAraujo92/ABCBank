@@ -7,11 +7,11 @@ using System.Net.Http.Json;
 
 namespace BankUI.Services;
 
-public class AccountHolderServices : IAccountHolderServices
+public class AccountHolderService : IAccountHolderService
 {
     private readonly HttpClient _httpClient;
 
-    public AccountHolderServices(HttpClient httpClient)
+    public AccountHolderService(HttpClient httpClient)
     {
         _httpClient = httpClient;
     }
@@ -34,7 +34,7 @@ public class AccountHolderServices : IAccountHolderServices
         return await response.ToResponse<AccountHolderResponse>();
     }
 
-    public async Task<ResponseWrapper<List<AccountHolderResponse>>> GetAccountHoldersByIdAsync()
+    public async Task<ResponseWrapper<List<AccountHolderResponse>>> GetAccountHoldersAsync()
     {
         var response = await _httpClient.GetAsync(AccountHoldersEndpoints.GetAll);
         return await response.ToResponse<List<AccountHolderResponse>>();

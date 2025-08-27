@@ -19,7 +19,7 @@ namespace BankUI
                 BaseAddress = new Uri(builder.Configuration.GetValue<string>("BaseApiUrl"))
             });
 
-            builder.Services.AddScoped<IAccountHolderServices, AccountHolderServices>();
+            builder.Services.AddScoped<IAccountHolderService, AccountHolderService>();
             builder.Services.AddMudServices();
 
             await builder.Build().RunAsync();
