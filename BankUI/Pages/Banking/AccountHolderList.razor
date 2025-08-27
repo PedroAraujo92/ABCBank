@@ -1,6 +1,13 @@
 ﻿@page "/banking/account-holder-list"
 
 <MudTable Items="@AccountHolders" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <ToolBarContent>
+        <MudFab 
+            Color="Color.Primary" 
+            StartIcon="@Icons.Material.Filled.Add" 
+            Size="Size.Small" 
+            OnClick="(() => AddAccountHolderAsync())"/>
+    </ToolBarContent>
     <HeaderContent>
         <MudTh>First Name</MudTh>
         <MudTh>Last Name</MudTh>

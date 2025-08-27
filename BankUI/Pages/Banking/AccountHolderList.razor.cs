@@ -25,4 +25,9 @@ public partial class AccountHolderList
 
         _loading = false;
     }
+
+    private async Task AddAccountHolderAsync()
+    {
+        Console.Out.WriteLine("Button clicked!");
+    }
 }
