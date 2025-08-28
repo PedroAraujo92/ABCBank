@@ -4,29 +4,25 @@
             Add Account Holder
         </TitleContent>
         <DialogContent>
-            <MudTextField @bind-Value="CreateAccountHolderRequest.FirstName" 
-                          Label="Outlined" 
+            <MudTextField @bind-Value="CreateAccountHolderRequest.FirstName"
+                          Label="First Name"
                           Variant="Variant.Outlined">
-                First Name
             </MudTextField>
             <MudTextField @bind-Value="CreateAccountHolderRequest.LastName"
-                          Label="Outlined"
+                          Label="Last Name"
                           Variant="Variant.Outlined">
-                Last Name
             </MudTextField>
-            <MudDatePicker Label="Date of Birth" 
+            <MudDatePicker Label="Date of Birth"
                            Editable="true"
-                           @bind-Date="@DateOfBirth" 
+                           @bind-Date="@DateOfBirth"
                            Placeholder="Date of Birth" />
             <MudTextField @bind-Value="CreateAccountHolderRequest.EmailAddress"
-                          Label="Outlined"
+                          Label="Email"
                           Variant="Variant.Outlined">
-                Email
             </MudTextField>
             <MudTextField @bind-Value="CreateAccountHolderRequest.ContactNumber"
-                          Label="Outlined"
+                          Label="Contact Number"
                           Variant="Variant.Outlined">
-                Contact Number
             </MudTextField>
         </DialogContent>
         <DialogActions>

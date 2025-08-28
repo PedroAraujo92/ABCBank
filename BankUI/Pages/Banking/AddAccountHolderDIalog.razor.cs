@@ -4,10 +4,10 @@ using MudBlazor;
 
 namespace BankUI.Pages.Banking;
 
-public partial class AddAccountHolderDIalog
+public partial class AddAccountHolderDialog
 {
     [Parameter]
-    public CreateAccountHolder CreateAccountHolderRequest { get; set; }
+    public CreateAccountHolder CreateAccountHolderRequest { get; set; } = new();
 
     [CascadingParameter]
     IMudDialogInstance MudDialog { get; set; }
@@ -22,6 +22,11 @@ public partial class AddAccountHolderDIalog
         if (_form.IsValid)
         {
             // Cast DateOfBirth to DateOnly and assign to CreateAccountHolderRequest
+            if (!DateOfBirth.HasValue)
+            {
+                _snackbar.Add("Date of Birth is required.", Severity.Error);
+                return;
+            }
             CreateAccountHolderRequest.DateOfBirth = (DateTime)DateOfBirth;
 
             var response = await _accountHolderService.AddAccountHolderAsync(CreateAccountHolderRequest);

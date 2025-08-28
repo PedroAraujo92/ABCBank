@@ -11,7 +11,7 @@ public partial class AccountHolderList
     protected override async Task OnInitializedAsync()
     {
         var response = await _accountHolderService.GetAccountHoldersAsync();
-        if(response.IsSuccessful)
+        if (response.IsSuccessful)
         {
             AccountHolders = response.Data;
         }
@@ -28,6 +28,20 @@ public partial class AccountHolderList
 
     private async Task AddAccountHolderAsync()
     {
-        Console.Out.WriteLine("Button clicked!");
+        var parameters = new DialogParameters();
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
+            BackdropClick = true,
+        };
+
+        var dialog = await _dialogService.ShowAsync<AddAccountHolderDialog>("Add Account Holder", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            await OnInitializedAsync();
+        }
     }
 }
