@@ -14,6 +14,7 @@
         <MudTh>Date of Birth</MudTh>
         <MudTh>Contact Number</MudTh>
         <MudTh>Email</MudTh>
+        <MudTh>Actions</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="First Name">@context.FirstName</MudTd>
@@ -21,5 +22,12 @@
         <MudTd DataLabel="DOB">@context.DateOfBirth.ToString("dd/MM/yyyy")</MudTd>
         <MudTd DataLabel="Contact No">@context.ContactNumber</MudTd>
         <MudTd DataLabel="Email">@context.EmailAddress</MudTd>
+        <MudTd DataLabel="Actions">
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert"
+                     AriaLabel="Open user menu">
+                <MudMenuItem Label="Update" />
+                <MudMenuItem Label="Delete" />
+            </MudMenu>
+        </MudTd>
     </RowTemplate>
 </MudTable>
