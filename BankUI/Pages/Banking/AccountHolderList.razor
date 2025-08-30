@@ -25,8 +25,8 @@
         <MudTd DataLabel="Actions">
             <MudMenu Icon="@Icons.Material.Filled.MoreVert"
                      AriaLabel="Open user menu">
-                <MudMenuItem Label="Update" />
-                <MudMenuItem Label="Delete" />
+                <MudMenuItem Label="Update" OnClick="(() => UpdateAccountHolderAsync(context.Id))"/>
+                <MudMenuItem Label="Delete" OnClick="(() => DeleteAccountHolderAsync(context.Id)" />
             </MudMenu>
         </MudTd>
     </RowTemplate>
