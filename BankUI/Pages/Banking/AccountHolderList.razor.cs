@@ -109,4 +109,9 @@ public partial class AccountHolderList
             await OnInitializedAsync();
         }
     }
+
+    private void ManageAccounts(int accountHolderId)
+    {
+        _navigationManager.NavigateTo($"/banking/manage-accounts/{accountHolderId}");
+    }
 }
