@@ -32,7 +32,7 @@
         </DialogContent>
         <DialogActions>
             <MudButton OnClick="Cancel">Cancel</MudButton>
-            <MudButton Color="Color.Primary" OnClick="SubmitAsync"
+            <MudButton Color="Color.Success" OnClick="SubmitAsync"
                        Disabled="@(!_validator.Validate(UpdateAccountHolderRequest).IsValid)">Save</MudButton>
         </DialogActions>
     </MudDialog>
