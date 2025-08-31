@@ -1,4 +1,5 @@
-﻿using Common.Requests;
+﻿using BankUI.Pages.Banking.Validators;
+using Common.Requests;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -6,6 +7,8 @@ namespace BankUI.Pages.Banking;
 
 public partial class UpdateAccountHolderDialog
 {
+    private UpdateAccountHolderValidator _validator = new();
+
     [Parameter]
     public UpdateAccountHolder UpdateAccountHolderRequest { get; set; } = new();
 
@@ -15,7 +18,14 @@ public partial class UpdateAccountHolderDialog
     MudForm _form = default;
 
     private void Cancel() => MudDialog.Cancel();
-
+    private async Task SubmitAsync()
+    {
+        await _form.Validate();
+        if (_form.IsValid)
+        {
+            await SaveAsync();
+        }
+    }
     private async Task SaveAsync()
     {
         await _form.Validate();

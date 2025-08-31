@@ -1,4 +1,4 @@
-﻿<MudForm @ref="@_form" Model="UpdateAccountHolderRequest">
+﻿<MudForm @ref="@_form" Model="UpdateAccountHolderRequest" Validation="@(_validator.ValidateValuesAsync)" ValidationDelay="0">
     <MudDialog>
         <TitleContent>
             Edit Account Holder
@@ -11,24 +11,29 @@
             </MudTextField>
             <MudTextField @bind-Value="UpdateAccountHolderRequest.FirstName"
                           Label="First Name"
-                          Variant="Variant.Outlined">
+                          Variant="Variant.Outlined"                          
+                          For="@(() => UpdateAccountHolderRequest.FirstName)">
             </MudTextField>
             <MudTextField @bind-Value="UpdateAccountHolderRequest.LastName"
                           Label="Last Name"
-                          Variant="Variant.Outlined">
+                          Variant="Variant.Outlined"
+                          For="@(() => UpdateAccountHolderRequest.LastName)">
             </MudTextField>
             <MudTextField @bind-Value="UpdateAccountHolderRequest.EmailAddress"
                           Label="Email"
-                          Variant="Variant.Outlined">
+                          Variant="Variant.Outlined"
+                          For="@(() => UpdateAccountHolderRequest.EmailAddress)">
             </MudTextField>
             <MudTextField @bind-Value="UpdateAccountHolderRequest.ContactNumber"
                           Label="Contact Number"
-                          Variant="Variant.Outlined">
+                          Variant="Variant.Outlined"
+                          For="@(() => UpdateAccountHolderRequest.ContactNumber)">
             </MudTextField>
         </DialogContent>
         <DialogActions>
             <MudButton OnClick="Cancel">Cancel</MudButton>
-            <MudButton Color="Color.Primary" OnClick="SaveAsync">Save</MudButton>
+            <MudButton Color="Color.Primary" OnClick="SubmitAsync"
+                       Disabled="@(!_validator.Validate(UpdateAccountHolderRequest).IsValid)">Save</MudButton>
         </DialogActions>
     </MudDialog>
 </MudForm>
