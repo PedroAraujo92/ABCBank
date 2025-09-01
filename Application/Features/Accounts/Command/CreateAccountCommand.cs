@@ -9,7 +9,7 @@ namespace Application.Features.Accounts.Command;
 
 public class CreateAccountCommand : IRequest<ResponseWrapper<int>>
 {
-    public CreateAccountRequest CreateAccount { get; set; }
+    public CreateAccount CreateAccount { get; set; }
 }
 
 public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, ResponseWrapper<int>>

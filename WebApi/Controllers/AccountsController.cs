@@ -10,7 +10,7 @@ namespace WebApi.Controllers;
 public class AccountsController : BaseApiController
 {
     [HttpPost("add")]
-    public async Task<IActionResult> AddAccountAsync([FromBody]CreateAccountRequest createAccount)
+    public async Task<IActionResult> AddAccountAsync([FromBody]CreateAccount createAccount)
     {
         var command = new CreateAccountCommand { CreateAccount = createAccount };
         var response = await Sender.Send(command);
@@ -60,7 +60,7 @@ public class AccountsController : BaseApiController
     }
 
     [HttpPost("transaction")]
-    public async Task<IActionResult> CreateTransactionAsync([FromBody] TransactionRequest transaction)
+    public async Task<IActionResult> CreateTransactionAsync([FromBody] Transaction transaction)
     {
         var command = new CreateTransactionCommand { Transaction = transaction };
         var response = await Sender.Send(command);
@@ -75,6 +75,18 @@ public class AccountsController : BaseApiController
     public async Task<IActionResult> GetAccountTransactionsAsync(int accountId)
     {
         var query = new GetAccountTransactionsQuery { AccountId = accountId };
+        var response = await Sender.Send(query);
+        if (response.IsSuccessful)
+        {
+            return Ok(response);
+        }
+        return NotFound(response);
+    }
+
+    [HttpGet("account-holder/{accountHolderId}")]
+    public async Task<IActionResult> GetAccountsByAccountHolderIdAsync(int accountHolderId)
+    {
+        var query = new GetAccountsByAccountHolderId { AccountHolderId = accountHolderId };
         var response = await Sender.Send(query);
         if (response.IsSuccessful)
         {
