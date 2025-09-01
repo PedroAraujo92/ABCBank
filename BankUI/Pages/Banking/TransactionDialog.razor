@@ -1,5 +1,5 @@
 ﻿@using Common.Enums
-<MudForm @ref="@_form" Model="TransactionRequest">
+<MudForm @ref="@_form" Model="TransactionRequest" Validation="@(_validator.ValidateValue)" ValidationDelay="0">
     <MudDialog>
         <TitleContent>
             Account Transaction
@@ -12,6 +12,7 @@
                                   Margin="Margin.Dense"
                                   Variant="Variant.Outlined"
                                   ReadOnly="true"
+                                  For="@(() => TransactionRequest.CurrentBalance)"
                                   Adornment="Adornment.Start" AdornmentText="R$" AdornmentColor="Color.Primary" />
                 </MudItem>
                 <MudItem xs="12" sm="6" md="6">
@@ -19,12 +20,14 @@
                                      Label="Transaction Amount"
                                      Margin="Margin.Dense"
                                      Variant="Variant.Outlined"
+                                     For="@(() => TransactionRequest.Amount)"
                                      Adornment="Adornment.Start" AdornmentText="R$" AdornmentColor="Color.Primary" />
                 </MudItem>
                 <MudItem xs="12" sm="6" md="6">
                     <MudSelect @bind-Value="TransactionRequest.Type"
                                Label="Transaction Type"
                                Margin="Margin.Dense"
+                               For="@(() => TransactionRequest.Type)"
                                Variant="Variant.Outlined">
                         @foreach (TransactionType type in Enum.GetValues(typeof(TransactionType)))
                         {
@@ -37,7 +40,8 @@
         <DialogActions>
             <MudButton OnClick="Cancel" Class="mr-auto">Cancel</MudButton>
             <MudButton Color="Color.Success" Class="me-4" OnClick="SubmitAsync"
-                       Variant="Variant.Filled">Save</MudButton>
+                       Variant="Variant.Filled"
+                       Disabled="@(!_validator.Validate(TransactionRequest).IsValid)">Save</MudButton>
         </DialogActions>
     </MudDialog>
 </MudForm>
