@@ -9,7 +9,7 @@ namespace Application.Features.Accounts.Command;
 
 public class CreateTransactionCommand : IRequest<ResponseWrapper<int>>
 {
-    public Common.Requests.Transaction Transaction { get; set; }
+    public Common.Requests.TransactionRequest Transaction { get; set; }
 }
 
 public class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, ResponseWrapper<int>>

@@ -52,7 +52,7 @@ public class AccountService : IAccountService
         return await response.ToResponse<List<TransactionResponse>>();
     }
 
-    public async Task<ResponseWrapper<int>> TransactionAsync(Transaction transaction)
+    public async Task<ResponseWrapper<int>> TransactionAsync(TransactionRequest transaction)
     {
         var response = await _httpClient.PostAsJsonAsync(AccountsEndpoints.Transaction, transaction);
         return await response.ToResponse<int>();
