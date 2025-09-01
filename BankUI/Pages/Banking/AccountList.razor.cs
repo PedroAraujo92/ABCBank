@@ -69,4 +69,9 @@ public partial class AccountList
             await OnInitializedAsync();
         }
     }
+
+    private void History(int accountId)
+    {
+        _navigationManager.NavigateTo($"/banking/account-history/{accountId}");
+    }
 }

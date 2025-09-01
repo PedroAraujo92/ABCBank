@@ -31,7 +31,7 @@ else
                         <MudMenu Icon="@Icons.Material.Filled.MoreVert"
                                  AriaLabel="Open user menu">
                             <MudMenuItem OnClick="(() => TransactionAsync(context.Id, context.Balance))" Label="Transact" />
-                            <MudMenuItem Label="History" />
+                            <MudMenuItem OnClick="(() => History(context.Id))" Label="History" />
                         </MudMenu>
                     </MudTd>
                 </RowTemplate>
