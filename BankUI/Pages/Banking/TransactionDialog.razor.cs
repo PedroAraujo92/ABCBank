@@ -14,7 +14,12 @@ public partial class TransactionDialog
     IMudDialogInstance MudDialog { get; set; }
     public TransactionRequest TransactionRequest { get; set; } = new();
     MudForm _form = default;
-
+    
+    protected override void OnInitialized()
+    {
+        TransactionRequest.CurrentBalance = Balance;
+        Console.WriteLine(TransactionRequest.CurrentBalance);
+    }
     private async Task SubmitAsync()
     {
         await _form.Validate();
