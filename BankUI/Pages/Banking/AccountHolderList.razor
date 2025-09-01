@@ -1,25 +1,48 @@
 ﻿@page "/banking/account-holder-list"
 
-<MudTable Items="@AccountHolders" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
-    <ToolBarContent>
-        <MudFab 
-            Color="Color.Primary" 
-            StartIcon="@Icons.Material.Filled.Add" 
-            Size="Size.Small" 
-            OnClick="(() => AddAccountHolderAsync())"/>
-    </ToolBarContent>
-    <HeaderContent>
-        <MudTh>First Name</MudTh>
-        <MudTh>Last Name</MudTh>
-        <MudTh>Date of Birth</MudTh>
-        <MudTh>Contact Number</MudTh>
-        <MudTh>Email</MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd DataLabel="First Name">@context.FirstName</MudTd>
-        <MudTd DataLabel="Last Name">@context.LastName</MudTd>
-        <MudTd DataLabel="DOB">@context.DateOfBirth.ToString("dd/MM/yyyy")</MudTd>
-        <MudTd DataLabel="Contact No">@context.ContactNumber</MudTd>
-        <MudTd DataLabel="Email">@context.EmailAddress</MudTd>
-    </RowTemplate>
-</MudTable>
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            <MudAvatar>
+                <MudIcon Icon="@Icons.Material.Filled.ManageAccounts" />
+            </MudAvatar>
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            <MudText Typo="Typo.body1">Account Holders</MudText>
+            <MudText Typo="Typo.body2">All Account Holders</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudTable Items="@AccountHolders" Elevation="25" Dense="true" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+            <ToolBarContent>
+                <MudFab Color="Color.Primary"
+                        StartIcon="@Icons.Material.Filled.Add"
+                        Size="Size.Small"
+                        OnClick="(() => AddAccountHolderAsync())" />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>First Name</MudTh>
+                <MudTh>Last Name</MudTh>
+                <MudTh>Date of Birth</MudTh>
+                <MudTh>Contact Number</MudTh>
+                <MudTh>Email</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="First Name">@context.FirstName</MudTd>
+                <MudTd DataLabel="Last Name">@context.LastName</MudTd>
+                <MudTd DataLabel="DOB">@context.DateOfBirth.ToString("dd/MM/yyyy")</MudTd>
+                <MudTd DataLabel="Contact No">@context.ContactNumber</MudTd>
+                <MudTd DataLabel="Email">@context.EmailAddress</MudTd>
+                <MudTd DataLabel="Actions">
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert"
+                             AriaLabel="Open user menu">
+                        <MudMenuItem Label="Update" OnClick="(() => UpdateAccountHolderAsync(context.Id))" />
+                        <MudMenuItem Label="Accounts" OnClick="(() => ManageAccounts(context.Id))"/>
+                        <MudMenuItem Label="Delete" OnClick="(() => DeleteAsync(context.Id, context.FirstName, context.LastName))" />
+                    </MudMenu>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudCardContent>
+</MudCard>

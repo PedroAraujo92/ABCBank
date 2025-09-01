@@ -1,0 +1,13 @@
+﻿<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5" Class="mb-2">@Title</MudText>
+            <MudText Typo="Typo.body1" Class="mb-1">@Description</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudTooltip Text="Close" Delay="0" Placement="Placement.Start">
+                <MudIconButton OnClick="@CloseButtonClickedAsync" Class="mt-4 me-2" Icon="@Icons.Material.Filled.KeyboardReturn" Color="Color.Error" Size="Size.Small" />
+            </MudTooltip>
+        </CardHeaderActions>
+    </MudCardHeader>
+</MudCard>

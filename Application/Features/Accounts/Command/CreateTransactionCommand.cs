@@ -9,7 +9,7 @@ namespace Application.Features.Accounts.Command;
 
 public class CreateTransactionCommand : IRequest<ResponseWrapper<int>>
 {
-    public TransactionRequest Transaction { get; set; }
+    public Common.Requests.TransactionRequest Transaction { get; set; }
 }
 
 public class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, ResponseWrapper<int>>
@@ -41,7 +41,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
                 return new ResponseWrapper<int>().Failed("Insufficient funds");
             }
 
-            var transaction = new Transaction()
+            var transaction = new Domain.Transaction()
             {
                 AccountId = request.Transaction.AccountId,
                 Amount = request.Transaction.Amount,
@@ -50,7 +50,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
             };
 
             accountInDb.Balance -= request.Transaction.Amount;
-            await _unitOfWork.WriteRepositoryFor<Transaction>().AddAsync(transaction);
+            await _unitOfWork.WriteRepositoryFor<Domain.Transaction>().AddAsync(transaction);
             await _unitOfWork.WriteRepositoryFor<Account>().UpdateAsync(accountInDb);
             await _unitOfWork.CommitAsync(cancellationToken);
 
@@ -58,7 +58,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
         }
         else if (request.Transaction.Type == TransactionType.Deposit)
         {
-            var transaction = new Transaction()
+            var transaction = new Domain.Transaction()
             {
                 AccountId = request.Transaction.AccountId,
                 Amount = request.Transaction.Amount,
@@ -66,7 +66,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
                 Date = DateTime.UtcNow
             };
             accountInDb.Balance += request.Transaction.Amount;
-            await _unitOfWork.WriteRepositoryFor<Transaction>().AddAsync(transaction);
+            await _unitOfWork.WriteRepositoryFor<Domain.Transaction>().AddAsync(transaction);
             await _unitOfWork.WriteRepositoryFor<Account>().UpdateAsync(accountInDb);
             await _unitOfWork.CommitAsync(cancellationToken);
 

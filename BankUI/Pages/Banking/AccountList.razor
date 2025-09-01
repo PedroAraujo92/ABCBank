@@ -1,0 +1,41 @@
+﻿@if (_loading)
+{
+    <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate=true />
+}
+else
+{
+    <MudCard Elevation="25">
+        <MudCardContent>
+            <MudTable Items="@Accounts" Elevation="25" Dense="true" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+                <ToolBarContent>
+                    <MudFab Color="Color.Primary"
+                            StartIcon="@Icons.Material.Filled.Add"
+                            Size="Size.Small"
+                            OnClick="(() => AddAccountAsync())" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Account Number</MudTh>
+                    <MudTh>Balance</MudTh>
+                    <MudTh>Active</MudTh>
+                    <MudTh>Account Type</MudTh>
+                    <MudTh>Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Account Number">@context.AccountNumber</MudTd>
+                    <MudTd DataLabel="Balance">@context.Balance.ToString("C", new System.Globalization.CultureInfo("pt-BR"))</MudTd>
+                    <MudTd DataLabel="Active">
+                        <MudCheckBox @bind-value="@context.IsActive" Color="Color.Primary" ReadOnly="true"></MudCheckBox>
+                    </MudTd>
+                    <MudTd DataLabel="Account Type">@context.Type</MudTd>
+                    <MudTd DataLabel="Actions">
+                        <MudMenu Icon="@Icons.Material.Filled.MoreVert"
+                                 AriaLabel="Open user menu">
+                            <MudMenuItem OnClick="(() => TransactionAsync(context.Id, context.Balance))" Label="Transact" />
+                            <MudMenuItem Label="History" />
+                        </MudMenu>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudCardContent>
+    </MudCard>
+}

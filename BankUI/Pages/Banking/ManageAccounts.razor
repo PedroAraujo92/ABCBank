@@ -1,0 +1,28 @@
+﻿@page "/banking/manage-accounts/{AccountHolderId:int}"
+
+<Header OnClose="PageClosed" Title="Manage Accounts" Description="Manage Account Holders' Account" />
+
+@if (_loading)
+{
+    <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate=true />
+}
+else
+{
+    <MudExpansionPanel style="padding:10px!important; margin-bottom:10px!important; border-radius: var(--mud-default-borderradius) !important;"
+                       Class="mud-elevation-25" Text="Account Holder">
+        <MudGrid Class="py-2">
+            <MudItem xs="12" sm="6" md="6">
+                <MudTextField Label="First Name" @bind-value="@AccountHolder.FirstName" ReadOnly="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="6">
+                <MudTextField Label="Last Name" @bind-value="@AccountHolder.LastName" ReadOnly="true" />
+            </MudItem>
+        </MudGrid>
+    </MudExpansionPanel>
+
+    <MudTabs Elevation="25" Rounded="true" Outlined="false" Color="Color.Transparent" PanelClass="mt-6">
+        <MudTabPanel Text="Bank Accounts">
+            <AccountList AccountHolderId="@AccountHolderId"/>
+        </MudTabPanel>
+    </MudTabs>
+}
