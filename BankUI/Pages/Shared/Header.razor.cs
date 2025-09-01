@@ -8,4 +8,10 @@ public partial class Header
     public string Title { get; set; }
     [Parameter]
     public string Description { get; set; }
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+    protected async Task CloseButtonClickedAsync()
+    {
+        await OnClose.InvokeAsync(null);
+    }
 }

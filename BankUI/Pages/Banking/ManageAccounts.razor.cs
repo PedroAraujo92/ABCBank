@@ -7,4 +7,9 @@ public partial class ManageAccounts
     [Parameter]
     public int AccountHolderId { get; set; }
 
+    private void PageClosed()
+    {
+        _navigationManager.NavigateTo("/banking/account-holder-list");
+    }
+
 }
