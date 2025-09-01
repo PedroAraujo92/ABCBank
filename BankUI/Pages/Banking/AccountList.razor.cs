@@ -29,6 +29,22 @@ public partial class AccountList
 
     private async Task AddAccountAsync()
     {
-
+        var parameters = new DialogParameters
+        {
+            {nameof(AddAccountDialog.AccountHolderId), AccountHolderId }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true,
+            BackdropClick = false,
+        };
+        var dialog = await _dialogService.ShowAsync<AddAccountDialog>("Open Bank Account", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            await OnInitializedAsync();
+        }
     }
 }

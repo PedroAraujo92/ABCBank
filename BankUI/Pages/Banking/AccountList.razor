@@ -18,12 +18,12 @@ else
                     <MudTh>Balance</MudTh>
                     <MudTh>Active</MudTh>
                     <MudTh>Account Type</MudTh>
-                    <MudTh Style="text-align:right">Actions</MudTh>
+                    <MudTh>Actions</MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="Account Number">@context.AccountNumber</MudTd>
                     <MudTd DataLabel="Balance">@context.Balance.ToString("C", new System.Globalization.CultureInfo("pt-BR"))</MudTd>
-                    <MudTd DataLabel="Active" Style="text-align:right">
+                    <MudTd DataLabel="Active">
                         <MudCheckBox @bind-value="@context.IsActive" Color="Color.Primary" ReadOnly="true"></MudCheckBox>
                     </MudTd>
                     <MudTd DataLabel="Account Type">@context.Type</MudTd>
